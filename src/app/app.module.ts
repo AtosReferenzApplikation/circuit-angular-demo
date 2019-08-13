@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ManagementModule } from './management/management.module';
@@ -17,6 +18,18 @@ import { FeedbackModule } from './feedback/feedback.module';
     AppComponent
   ],
   imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    CoreModule,
+    LoginModule,
+    ManagementModule,
+    CustomerModule,
+    SharedModule,
+    FeedbackModule,
+    AppRoutingModule
+  ],
+  exports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

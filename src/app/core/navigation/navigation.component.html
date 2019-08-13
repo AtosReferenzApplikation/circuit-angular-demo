@@ -1,22 +1,40 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-  <a class="navbar-brand" routerLink="/management"><img id="atos-logo"
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<nav theme class="navbar navbar-expand-sm navbar-dark nav-bar-theming">
+  <a theme class="navbar-brand" *ngIf="theme_atos" routerLink="/management"><img id="atos-logo"
       src="../../../assets/images/atos-logo.png"
       style="margin-right: 10px;">Servicecenter 2020</a>
-  <button class="navbar-toggler" type="button"
+  <a theme class="navbar-brand" *ngIf="theme_ba" routerLink="/management"><img id="ba-logo"
+      src="../../../assets/images/header-ba-white.png"
+      style="margin-right: 10px;">Servicecenter 2020</a>
+  <button theme class="navbar-toggler" type="button"
     (click)="toggleNavbar = !toggleNavbar" data-toggle="collapse"
     data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
     aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span theme class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup"
+  <div theme class="collapse navbar-collapse" id="navbarNavAltMarkup"
     [ngbCollapse]="toggleNavbar">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" [ngClass]="{'active': !router.url.includes('customer')}"
-      routerLink="/management">Kundenverwaltung</a>
+    <div theme class="navbar-nav">
+      <a theme class="nav-item nav-link active" [ngClass]="{'active': !router.url.includes('customer')}"
+      routerLink="/management" style="color: var(--on-primary);">Kundenverwaltung</a>
     </div>
   </div>
-  <button type="button" class="btn btn-primary" *ngIf="!loggedIn"
+  <div theme class="row">
+    <div theme class="col">
+      <div theme ngbDropdown class="d-inline-block">
+        <button theme class="btn btn-primary" id="dropdown1"
+        ngbDropdownToggle style="margin-right: 3px;"><fa-icon [icon]="faFillDrip"></fa-icon></button>
+        <div theme ngbDropdownMenu aria-labelledby="dropdown1">
+          <button theme (click)="setThemeAtos()" ngbDropdownItem class="btn btn-primary">Atos</button>
+          <button theme (click)="setThemeBa()" ngbDropdownItem class="btn btn-primary">Bundesagentur</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button theme type="button" class="btn btn-primary" *ngIf="!loggedIn"
     (click)="logon()">Login <fa-icon [icon]="faSignInAlt"></fa-icon></button>
-  <button type="button" class="btn btn-primary" *ngIf="loggedIn"
+  <button theme type="button" class="btn btn-primary" *ngIf="loggedIn"
     (click)="logout()">Logout <fa-icon [icon]="faSignOutAlt"></fa-icon></button>
 </nav>
+

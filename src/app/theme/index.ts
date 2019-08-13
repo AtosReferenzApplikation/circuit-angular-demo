@@ -1,0 +1,4 @@
+export * from './theme.module';
+export * from './theme.service';
+export * from './atos-theme';
+export * from './ba-theme';

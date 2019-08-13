@@ -71,3 +71,17 @@ fa-icon {
     margin-top: 90px;
   }
 }
+
+.btn-primary {
+  background-color: var(--primary);
+  color: black;
+}
+
+.btn-primary:hover {
+  background-color: white;
+  border-color: var(--primary);
+}
+
+.form-control {
+  border: 1px solid var(--primary) !important;
+}

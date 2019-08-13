@@ -1,8 +1,62 @@
 .navbar-brand {
-  color: white !important;
+  color: var(--on-primary) !important;
+}
+
+.nav-bar-theming {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.nav-item {
+  color: var(--on-primary);
+  &:hover {
+    background-color: var(--hover);
+  }
 }
 
 #atos-logo {
-  width: 100px;
+  width: auto;
   height: 2rem;
 }
+
+.open
+{
+  display: block;
+}
+
+#dropdown1 {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+#dropdown1:hover {
+  background-color: var(--hover);
+}
+
+#dropdown1:focus {
+  background-color: var(--hover);
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+ .btn-primary:hover {
+   background-color: var(--hover);
+   border-color: var(--primary);
+   color: var(--on-primary);
+ }
+
+.btn-primary:focus {
+  box-shadow: none;
+}
+
+.dropdown-menu {
+  background-color: transparent;
+  border-color: transparent;
+}
+

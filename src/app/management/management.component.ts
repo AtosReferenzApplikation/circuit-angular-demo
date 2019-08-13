@@ -110,7 +110,14 @@ export class ManagementComponent implements OnInit {
     }
   }
 
+  // getCustomers with sample customers
   getCustomers() {
+    this.customerList = SAMPLE_CUSTOMERS;
+    this.displayedCustomers = SAMPLE_CUSTOMERS;
+  }
+
+  // getCustomers with http-Request
+  /* getCustomers() {
     this.customerService.getAllCustomers().subscribe(
       (response: any) => {
         this.customerList = response;
@@ -122,7 +129,7 @@ export class ManagementComponent implements OnInit {
         this.displayedCustomers = SAMPLE_CUSTOMERS;
       }
     );
-  }
+  } */
 
   updateCustomerById(id: any, customer: Customer) {
     this.customerService

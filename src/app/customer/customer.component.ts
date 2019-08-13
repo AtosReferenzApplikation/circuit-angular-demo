@@ -1,3 +1,4 @@
+import { ManagementComponent } from './../management/management.component';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,6 +14,7 @@ import { Customer } from '../models/customer';
 export class CustomerComponent implements OnInit {
   customer: Customer;
   avatarUrl = '';
+  ManagementComponent: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -21,6 +23,12 @@ export class CustomerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    /* this.ManagementComponent.getId.subscribe(getId => {
+      this.customerService.getCustomerById(getId.id).subscribe(val => {
+        this.customer = val;
+        this.getAvatarOfCustomer(this.customer);
+      });
+    }); */
     this.activatedRoute.params.subscribe(params => {
       this.customerService.getCustomerById(params.id).subscribe(val => {
         this.customer = val;

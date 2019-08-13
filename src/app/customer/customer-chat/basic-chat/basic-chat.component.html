@@ -10,7 +10,7 @@
     <div id="chat-body-content" *ngFor="let thread of threads">
       <div class="rtc" *ngIf="thread.parentItem.type === 'RTC'">
         <p *ngIf="thread.parentItem.rtc.type === 'MISSED'" style="float: left;">
-          Verspasster Anruf
+          Verpasster Anruf
           von {{getParticipantById(thread.parentItem.creatorId)}}</p>
         <p *ngIf=" thread.parentItem.rtc.type==='ENDED'" style=" float: left;">
           Telefonat &nbsp;·&nbsp; Dauer:

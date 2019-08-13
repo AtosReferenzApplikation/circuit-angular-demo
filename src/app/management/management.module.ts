@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ThemeModule, atosTheme, baTheme } from '../theme';
 
 @NgModule({
   imports: [
@@ -19,7 +20,11 @@ import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     NgbCollapseModule,
     FontAwesomeModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ThemeModule.forRoot({
+      themes: [atosTheme, baTheme],
+      active: 'atos'
+    })
   ],
   declarations: [
     ManagementComponent

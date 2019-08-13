@@ -5,13 +5,20 @@
   text-align: center;
 }
 
-@mixin buttonBG($bg) {
-  border: 2px solid $bg;
-  color: $bg;
-  &:hover {
-    background-color: $bg;
-    transition: all 0.3s ease-in-out;
-  }
+.loginBtn {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.loginBtn:hover {
+  background-color: var(--primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: var(--on-primary);
 }
 
 .skewBtn {
@@ -26,14 +33,11 @@
   font-family: 'Lato', sans-serif;
   &:hover {
     border: none;
-    color: white;
+    color: var(--on-primary);
+    background-color: var(--primary);
     font-size: 25px;
     transform: scale(1.05);
   }
-}
-
-.loginBtn {
-  @include buttonBG($primary);
 }
 
 p {
