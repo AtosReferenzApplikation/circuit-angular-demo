@@ -12,19 +12,34 @@ const routes: Routes = [
     path: '',
     redirectTo: 'management',
     pathMatch: 'full',
-    canActivate: [AuthenticationGuard]
+    //canActivate: [AuthenticationGuard]
   },
   { path: 'login', component: LoginComponent },
   { path: 'feedback', component: FeedbackComponent, canActivate: [AuthenticationGuard] },
   {
     path: 'management',
     component: ManagementComponent,
-    canActivate: [AuthenticationGuard]
+    //canActivate: [AuthenticationGuard]
   },
   {
-    path: 'management/customer/:id',
+    path: 'management/customer/:id1',
     component: CustomerComponent,
-    canActivate: [AuthenticationGuard]
+    //canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'management/customer/:id1/:id2',
+    component: CustomerComponent,
+    //canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'management/customer/:id1/:id2/:id3',
+    component: CustomerComponent,
+    //canActivate: [AuthenticationGuard]
+  },
+  {
+    path: 'management/customer/:id1/:id2/:id3/:id4',
+    component: CustomerComponent,
+    //canActivate: [AuthenticationGuard]
   },
   { path: '**', redirectTo: 'management' }
 ];

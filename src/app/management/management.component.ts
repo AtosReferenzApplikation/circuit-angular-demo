@@ -64,6 +64,8 @@ export class ManagementComponent implements OnInit {
     this.router.navigate(['/management/customer/' + customer.id]);
   }
 
+
+
   searchCustomers(term: string) {
     this.displayedCustomers = this.customerList.filter((item: Customer) => {
       return (item.name.toLowerCase() + item.surname.toLowerCase()).includes(

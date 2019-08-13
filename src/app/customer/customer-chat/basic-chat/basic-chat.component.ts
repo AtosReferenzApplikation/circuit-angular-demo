@@ -39,9 +39,11 @@ export class BasicChatComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.activatedRoute.params.subscribe(params => {
-      this.customerService.getCustomerById(params.id).subscribe(val => {
+      this.customerService.getCustomerById(params.id1).subscribe(val => {
         this.customer = val;
       });
+      //console.log(this.customer.id);
+      //console.log(this.loggedOnUser);
       // getParticipantById()??
     });
 
