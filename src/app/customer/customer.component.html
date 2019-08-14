@@ -1,10 +1,10 @@
-<div class="card" id="card">
+<div class="card" id="card" *ngFor="let customer of customersToShow" >
   <div class="card-header" id="card-header">
     <img
-      src="https://ui-avatars.com/api/?name={{customer1?.name}}+{{customer1?.surname}}"
+      src="https://ui-avatars.com/api/?name={{customer?.name}}+{{customer?.surname}}"
       class="rounded-circle">
     <div>
-      {{customer1?.name}} {{customer1?.surname}}<br>
+      {{customer?.name}} {{customer?.surname}}<br>
       <i>Offline</i><br>
     </div>
   </div>
@@ -19,104 +19,20 @@
           <div class="card-text">
             <table class="table table-sm table-borderless">
               <tbody>
-                <tr>
-                  <td>Kunde</td>
-                  <td>{{customer1?.salutation}} {{customer1?.name}}
-                    {{customer1?.surname}}</td>
-                </tr>
-                <tr>
-                  <td>Nationalität</td>
-                  <td>{{customer1?.nationality}}</td>
-                </tr>
-                <tr>
-                  <td>Adresse</td>
-                  <td>{{customer1?.address.postalcode}}
-                    {{customer1?.address.city}},
-                    {{customer1?.address.street}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <h6 class="card-subtitle mb-2 text-muted">Kontakt</h6>
-          <div class="card-text">
-            <table class="table table-sm table-borderless">
-              <tbody>
-                <tr>
-                  <td>E-Mail</td>
-                  <td>{{customer1?.email}}</td>
-                </tr>
-                <tr>
-                  <td>Telefon</td>
-                  <td>{{customer1?.phone}}</td>
-                </tr>
-                <tr>
-                  <td>Kontakt per</td>
-                  <td>
-                    <div class="td-badge"
-                      *ngFor="let form of customer1?.contactform">
-                      <span class="badge badge-secondary">{{form}}</span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-          </div>
-          <button class="btn btn-light"
-            (click)="generateChatProtocol()">Konversationsprotokoll
-            generieren</button>
-        </div>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="tab2">
-      <ng-template ngbTabTitle class="ngbTab">Konversation</ng-template>
-      <ng-template ngbTabContent>
-        <hr />
-        <div class="card-body">
-          <app-customer-chat></app-customer-chat>
-        </div>
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
-</div>
-
-
-<div class="card">
-  <div class="card-header" id="card-header2">
-    <img
-      src="https://ui-avatars.com/api/?name={{customer2?.name}}+{{customer2?.surname}}"
-      class="rounded-circle">
-    <div>
-      {{customer2?.name}} {{customer2?.surname}}<br>
-      <i>Offline</i><br>
-    </div>
-  </div>
-  <ngb-tabset #t="ngbTabset" type="pills">
-    <ngb-tab id="tab12">
-      <ng-template ngbTabTitle class="ngbTab">Informationen</ng-template>
-      <ng-template ngbTabContent>
-        <hr />
-        <div class="card-body" id="details2">
-          <h5 class="card-title">Kundendetails</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Kundendaten</h6>
-          <div class="card-text">
-            <table class="table table-sm table-borderless">
-              <tbody>
               <tr>
                 <td>Kunde</td>
-                <td>{{customer2?.salutation}} {{customer2?.name}}
-                  {{customer2?.surname}}</td>
+                <td>{{customer?.salutation}} {{customer?.name}}
+                  {{customer?.surname}}</td>
               </tr>
               <tr>
                 <td>Nationalität</td>
-                <td>{{customer2?.nationality}}</td>
+                <td>{{customer?.nationality}}</td>
               </tr>
               <tr>
                 <td>Adresse</td>
-                <td>{{customer2?.address.postalcode}}
-                  {{customer2?.address.city}},
-                  {{customer2?.address.street}}
+                <td>{{customer?.address.postalcode}}
+                  {{customer?.address.city}},
+                  {{customer?.address.street}}
                 </td>
               </tr>
               </tbody>
@@ -128,17 +44,17 @@
               <tbody>
               <tr>
                 <td>E-Mail</td>
-                <td>{{customer2?.email}}</td>
+                <td>{{customer?.email}}</td>
               </tr>
               <tr>
                 <td>Telefon</td>
-                <td>{{customer2?.phone}}</td>
+                <td>{{customer?.phone}}</td>
               </tr>
               <tr>
                 <td>Kontakt per</td>
                 <td>
                   <div class="td-badge"
-                       *ngFor="let form of customer2?.contactform">
+                       *ngFor="let form of customer?.contactform">
                     <span class="badge badge-secondary">{{form}}</span>
                   </div>
                 </td>
@@ -150,10 +66,12 @@
           <button class="btn btn-light"
                   (click)="generateChatProtocol()">Konversationsprotokoll
             generieren</button>
+          <button class="btn btn-light"
+                  (click)="viewMoreCustomers()">add Hubert</button>
         </div>
       </ng-template>
     </ngb-tab>
-    <ngb-tab id="tab22">
+    <ngb-tab id="tab2">
       <ng-template ngbTabTitle class="ngbTab">Konversation</ng-template>
       <ng-template ngbTabContent>
         <hr />

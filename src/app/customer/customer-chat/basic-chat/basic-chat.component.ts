@@ -42,9 +42,8 @@ export class BasicChatComponent implements OnInit {
       this.customerService.getCustomerById(params.id1).subscribe(val => {
         this.customer = val;
       });
-      //console.log(this.customer.id);
-      //console.log(this.loggedOnUser);
-      // getParticipantById()??
+      console.log(this.customer.name);
+      console.log(this.loggedOnUser);
     });
 
     // this.circuitService.authenticateUser();
