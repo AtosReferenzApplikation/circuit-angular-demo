@@ -66,8 +66,18 @@
           <button class="btn btn-light"
                   (click)="generateChatProtocol()">Konversationsprotokoll
             generieren</button>
-          <button class="btn btn-light"
-                  (click)="viewMoreCustomers()">add Hubert</button>
+            <div theme class="row">
+              <div theme class="col">
+                <div theme ngbDropdown class="d-inline-block">
+                  <button theme class="btn btn-primary" id="dropdown1"
+                  ngbDropdownToggle>Dropdown</button>
+                  <div theme ngbDropdownMenu aria-labelledby="dropdown1">
+                    <button theme (click)="setThemeAtos()" ngbDropdownItem class="btn btn-primary">Atos</button>
+                    <button theme (click)="setThemeBa()" ngbDropdownItem class="btn btn-primary">Bundesagentur</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
       </ng-template>
     </ngb-tab>
