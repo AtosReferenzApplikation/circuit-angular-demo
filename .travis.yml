@@ -27,3 +27,8 @@ jobs:
         - npm run build
         - sh .travis/deploy_dockerhub.sh
         - sh .travis/deploy_heroku.sh
+stages:
+  - name: unit test
+    if: (branch = master) AND (type IN (push, pull_request))
+  - name: build docker image
+    if: (branch = master) AND (NOT (type IN (push, pull_request)))
