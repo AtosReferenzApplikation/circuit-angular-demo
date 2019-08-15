@@ -3,6 +3,8 @@ language:
   - node_js
 node_js:
   - "10"
+services:
+  - docker
 addons:
   - chrome: stable
 apt:
@@ -23,3 +25,5 @@ jobs:
     - stage: build docker image
       script:
         - npm run build
+        - docker build -t circuitwebapp .
+        - sh .travis/deploy_dockerhub.sh
