@@ -26,3 +26,4 @@ jobs:
       script:
         - npm run build
         - sh .travis/deploy_dockerhub.sh
+        - sh .travis/deploy_heroku.sh
