@@ -3,6 +3,8 @@ language:
   - node_js
 node_js:
   - "10"
+services:
+  - docker
 addons:
   - chrome: stable
 apt:
@@ -12,12 +14,15 @@ apt:
     - google-chrome-stable
     - google-chrome-beta
     # specifies that chrome should be installed, this is necessary for the angular tests
-cache:
-  directories:
-    - ./node_modules
-install:
-  - npm install
-script:
-  - npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
-after_success:
-  - echo "success!"
+jobs:
+  include:
+    - stage: unit test
+      install:
+        - npm install
+        - npm audit fix
+      script:
+        - npm run test -- --watch=false --browsers=ChromeHeadlessNoSandbox
+    - stage: build docker image
+      script:
+        - npm run build
+        - sh .travis/deploy_dockerhub.sh
