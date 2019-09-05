@@ -8,21 +8,12 @@
     <div *ngIf="participants && threads">
 
     <div id="chat-body-content" *ngFor="let thread of threads">
-      <div class="rtc" *ngIf="thread.parentItem.type === 'RTC'">
-        <p *ngIf="thread.parentItem.rtc.type === 'MISSED'" style="float: left;">
-          Verspasster Anruf
-          von {{getParticipantById(thread.parentItem.creatorId)}}</p>
-        <p *ngIf=" thread.parentItem.rtc.type==='ENDED'" style=" float: left;">
-          Telefonat &nbsp;·&nbsp; Dauer:
-          {{getMinutesAndSeconds(thread.parentItem.rtc.ended.duration)}}
-        </p>
-        <p style="float: right">{{msToDate(thread.parentItem.creationTime)}}
-        </p><br>
-      </div>
+
       <div class="message topic" *ngIf="thread.parentItem.type === 'TEXT'">
-        <img id="avatar" src="{{getAvatarByUserId(thread.parentItem.creatorId)}}"
-          class="rounded-circle">
+
         <div class="card card-body talk-bubble topic">
+
+
           <div *ngIf="thread.parentItem.text.subject">
             <b>
               <div [innerHTML]="thread.parentItem.text.subject"></div><i
@@ -31,11 +22,14 @@
             </b>
             <hr>
           </div>
+
           <div [innerHTML]="thread.parentItem.text.content"></div><i
             *ngIf="!thread.parentItem.text.content">Nachricht
             gelöscht</i>
         </div>
+
       </div>
+
       <div *ngFor="let text of thread.comments">
         <div class="message text">
           <img id="avatar" src="{{getAvatarByUserId(text.creatorId)}}"
@@ -62,7 +56,15 @@
       </div>
     </div>
   </div>
-    </div>
+</div>
+
+
+
+
+
+
+
+
     <div id="chat-footer">
     <div class="input-group">
       <div id="callBtn" *ngIf="!circuitService.call">

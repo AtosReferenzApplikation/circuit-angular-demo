@@ -36,12 +36,20 @@ export class CircuitService {
     domain: 'circuitsandbox.net',
     client_id: '8e3edf9798f341c08ae59b5d8cf74341',
     redirect_uri: this.redirectUri,
-    scope: 'ALL'
+    scope: 'READ_USER_PROFILE,' +
+      'WRITE_USER_PROFILE,' +
+      'READ_CONVERSATIONS,' +
+      'WRITE_CONVERSATIONS,' +
+      'READ_USER,' +
+      'CALLS,' +
+      'CALL_RECORDING,' +
+      'MENTION_EVENT,' +
+      'USER_MANAGEMENT'
   };
 
   constructor(private http: HttpClient, private router: Router) {
     // set Circuit SDK internal log level: Debug, Error, Info, Off, Warning
-    Circuit.logger.setLevel(Circuit.Enums.LogLevel.Off);
+    Circuit.logger.setLevel(Circuit.Enums.LogLevel.Debug);
 
     // create Circuit SDK client implicit
     this.client = new Circuit.Client({
@@ -159,25 +167,6 @@ export class CircuitService {
       })
       .catch(err => {
         return Promise.reject(err);
-      });
-  }
-
-  refreshAccessToken() {
-    // replace with client.renewToken()
-    this.http
-      .get(
-        this.restUri + '/oauth/token/' + localStorage.getItem('access_token')
-      )
-      .toPromise()
-      .then((res: any) => {
-        localStorage.setItem('access_token', res.accessToken);
-        this.headers = new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Accept', 'application/json')
-          .set(
-            'Authorization',
-            'Bearer ' + localStorage.getItem('access_token')
-          );
       });
   }
 

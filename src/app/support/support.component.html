@@ -1,0 +1,10 @@
+<p>
+  {{ request?.subject }}
+</p>
+
+<div *ngIf="request?.subject">
+  <button type="button" (click)="acceptSupportRequest()">
+    Accept Support Request
+  </button>
+  <a>Subject: {{ request?.subject }}</a>
+</div>

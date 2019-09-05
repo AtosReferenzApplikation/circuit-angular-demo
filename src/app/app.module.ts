@@ -11,10 +11,12 @@ import { CoreModule } from './core';
 import { LoginModule } from './login/login.module';
 import { SharedModule } from './shared';
 import { FeedbackModule } from './feedback/feedback.module';
+import { SupportComponent } from './support/support.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SupportComponent
   ],
   imports: [
     BrowserModule,

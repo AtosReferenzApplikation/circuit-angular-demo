@@ -74,7 +74,9 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
+            "scripts": [
+              "node_modules/@stomp/stompjs/lib/stomp-node.js"
+            ],
             "styles": [
               "src/styles.scss"
             ],

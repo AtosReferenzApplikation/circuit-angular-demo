@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import { WebsocketService} from './services/websocket/websocket.service';
 import { CustomerService } from './services/customer/customer.service';
 import { CircuitService } from './services/circuit/circuit.service';
 import { ToastService } from './services/toast/toast.service';
@@ -28,7 +29,8 @@ import { ToastrModule } from 'ngx-toastr';
   providers: [
     CustomerService,
     CircuitService,
-    ToastService
+    ToastService,
+    WebsocketService
   ],
   entryComponents: [
     ActivecallToast,

@@ -13,6 +13,8 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link active" [ngClass]="{'active': !router.url.includes('customer')}"
       routerLink="/management">Kundenverwaltung</a>
+      <a class="nav-item nav-link active" [ngClass]="{'active': !router.url.includes('support')}"
+         routerLink="/support">Support</a>
     </div>
   </div>
   <button type="button" class="btn btn-primary" *ngIf="!loggedIn"

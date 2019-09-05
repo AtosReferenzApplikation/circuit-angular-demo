@@ -6,6 +6,7 @@ import { ManagementComponent } from './management/management.component';
 import { CustomerComponent } from './customer/customer.component';
 import { AuthenticationGuard } from './core/authentication/authentication.guard';
 import { LoginComponent } from './login/login.component';
+import {SupportComponent} from './support/support.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,9 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'feedback', component: FeedbackComponent, canActivate: [AuthenticationGuard] },
+  { path: 'support',
+    component: SupportComponent
+  },
   {
     path: 'management',
     component: ManagementComponent,
