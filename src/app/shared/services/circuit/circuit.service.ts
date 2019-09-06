@@ -17,7 +17,7 @@ export class CircuitService {
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .set('Accept', 'application/json')
-    .set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+    .set('Authorization', 'Bearer ' /**+ acccess token */);
 
   // SDK var declarations
   client; // Circuit SDK instance
@@ -36,7 +36,8 @@ export class CircuitService {
     domain: 'circuitsandbox.net',
     client_id: '8e3edf9798f341c08ae59b5d8cf74341',
     redirect_uri: this.redirectUri,
-    scope: 'ALL'
+    // tslint:disable-next-line: max-line-length
+    scope: 'READ_USER_PROFILE,WRITE_USER_PROFILE,READ_CONVERSATIONS,WRITE_CONVERSATIONS,READ_USER,CALLS,CALL_RECORDING,MENTION_EVENT,USER_MANAGEMENT'
   };
 
   constructor(private http: HttpClient, private router: Router) {
@@ -77,140 +78,46 @@ export class CircuitService {
    *
    *******************/
 
-  // authentication for User with LogIn Popup
-  logonPopup() {
-    const state = Math.random()
-      .toString(36)
-      .substr(2, 15); // to prevent cross-site request forgery
-    const url =
-      this.authUri +
-      '?response_type=token&client_id=' +
-      this.oauthConfig.client_id +
-      '&redirect_uri=' +
-      this.redirectUri +
-      '&scope=' +
-      this.oauthConfig.scope +
-      '&state=' +
-      state; // auth request url
-
-    const logonPopup = window.open(
-      url, 'Circuit Authentication', 'centerscreen,location,resizable,alwaysRaised,width=400,height=504'
-    );
-
-    // close popup if user login was successful
-    const checkLogon = setInterval(() => {
-      try {
-        if (logonPopup.location.href.includes('access_token=')) {
-          const callbackUrl = logonPopup.location.href;
-          clearInterval(checkLogon);
-          logonPopup.close();
-          const access_token = this.getValueFromString(
-            'access_token',
-            callbackUrl
-          );
-          localStorage.setItem('access_token', access_token);
-          this.logonWithToken();
-        }
-      } catch (error) {} // todo: handle logon error
-    }, 100);
-  }
-
-  getValueFromString(value: string, url: string) {
-    value = value.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    const regexS = '[\\?&]' + value + '=([^&#]*)';
-    const regex = new RegExp(regexS);
-    const results = regex.exec(url);
-    if (results == null) {
-      return ''; // todo: handle logon error
-    } else {
-      return decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
-  }
-
-  /**************
-   *
-   * CIRCUIT SDK
-   *
-   *******************/
-
-  // try to logon with cached credentails/token
+  /**
+   * Logon to Circuit using OAuth2.
+   * @returns {Promise} A promise returning a the user
+   */
   authenticateUser() {
     this.loggedIn.next(false);
-    return this.validateAccessToken();
+    return this.client.logon().then(user => {
+      this.loggedIn.next(true);
+      return user;
+    }).catch(err => Promise.reject(err));
   }
 
-  validateAccessToken() {
-    return this.client
-      .validateToken(localStorage.getItem('access_token'))
-      .then(() => this.logonWithToken())
-      .catch(() => this.logonPopup());
-  }
-
-  // logon to circuit using access token stored in localStorage
-  logonWithToken() {
-    return this.client
-      .logon({
-        accessToken: localStorage.getItem('access_token'),
-        prompt: false
-      })
-      .then(user => {
-        this.loggedIn.next(true);
-        return user;
-      })
-      .catch(err => {
-        return Promise.reject(err);
-      });
-  }
-
-  refreshAccessToken() {
-    // replace with client.renewToken()
-    this.http
-      .get(
-        this.restUri + '/oauth/token/' + localStorage.getItem('access_token')
-      )
-      .toPromise()
-      .then((res: any) => {
-        localStorage.setItem('access_token', res.accessToken);
-        this.headers = new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Accept', 'application/json')
-          .set(
-            'Authorization',
-            'Bearer ' + localStorage.getItem('access_token')
-          );
-      });
-  }
-
-  // force user logout
+  /**
+   * Forces the logout
+   * @returns {Promise} - An empty promise
+   */
   logout() {
     this.loggedIn.next(false);
-    localStorage.removeItem('access_token');
     this.router.navigate(['/login']);
     return this.client.logout(true);
   }
 
   /**
-   * User
+   * Gets a user by his user id
+   * @param {string}  userId - Circuit user ID
+   * @returns {Promise} A promise that returns the user
    */
   getUserById(userId: string) {
     return this.client.getUserById(userId);
   }
 
   /**
-   * Calls
+   * Starts a call. A conversation will be created if it does not exist.
+   * @param {string}  user - Email or userID of the User to call
+   * @param {boolean} video - If it is a video call
+   * @returns {Promise} A promise that returns the call object
    */
-  // starts video/audio call with the specified user
-  // conversation will be created if it does not exist
-  startCall(email: string, video: boolean): Promise<any> {
+  startCall(user: string, video: boolean): Promise<any> {
     return this.client
-      .makeCall(
-        email,
-        {
-          audio: true,
-          video: video
-        },
-        true
-      )
+      .makeCall(user, {audio: true, video: video}, true)
       .then(call => (this.call = call))
       .catch(() => {
         if (!this.loggedIn.value) {
@@ -219,7 +126,11 @@ export class CircuitService {
       });
   }
 
-  // answer an incoming call
+  /**
+   * Answer an incoming call.
+   * @param {boolean} video - If it is a video call
+   * @returns {Promise} A promise that returns the call object
+   */
   answerCall(video: boolean) {
     if (!this.call) {
       return Promise.reject('No incoming call found');
@@ -231,7 +142,9 @@ export class CircuitService {
     return this.client.answerCall(this.call.callId, mediaType);
   }
 
-  // toggle own video
+  /**
+   * Toggle sending video on an existing call.
+   */
   toggleVideo() {
     if (!this.call) {
       return Promise.reject('No call found');
@@ -239,6 +152,9 @@ export class CircuitService {
     return this.client.toggleVideo(this.call.callId, res => console.log(res));
   }
 
+  /**
+   * Ends an existing call.
+   */
   endCall() {
     if (!this.call) {
       return Promise.resolve();
@@ -247,24 +163,31 @@ export class CircuitService {
   }
 
   /**
-   * Conversations
+   * Get the direct conversation with a user. A conversation will be created. If the user is not logged in, he will be prompted to do so.
+   * @param {string} user - User ID or email address
+   * @returns {Promise} A promise returning a the conversation
    */
-  getConversation(email) {
+  getConversation(user: string) {
     return this.client
-      .getDirectConversationWithUser(email, true)
+      .getDirectConversationWithUser(user, true)
       .then(conversation => {
         this.conversation = conversation;
         return this.client
           .getConversationFeed(conversation.convId)
           .then(conv => conv);
       })
-      .catch(err => {
+      .catch(() => {
         if (!this.loggedIn.value) {
           this.authenticateUser();
         }
       });
   }
 
+  /**
+   * Sends a message to a conversation. If the user is not logged in, he will be prompted to do so.
+   * @param {MessageContent} content - User ID or email address
+   * @returns {Promise} A promise returning a the message
+   */
   sendMessage(content: MessageContent) {
     return this.client
       .addTextItem(this.conversation.convId, content)
