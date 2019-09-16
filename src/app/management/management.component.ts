@@ -61,7 +61,7 @@ export class ManagementComponent implements OnInit {
   }
 
   redirectToCustomer(customer: Customer) {
-    this.router.navigate(['/management/customer/' + customer.id]);
+    this.router.navigate(['management/customer'], { queryParams: { ID1: customer.id } });
   }
 
 

@@ -22,6 +22,11 @@ const routes: Routes = [
     canActivate: [AuthenticationGuard]
   },
   {
+    path: 'management/customer',
+    component: CustomerComponent,
+    canActivate: [AuthenticationGuard]
+  },
+  {
     path: 'management/customer/:id1',
     component: CustomerComponent,
     canActivate: [AuthenticationGuard]

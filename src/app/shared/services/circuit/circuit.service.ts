@@ -36,7 +36,8 @@ export class CircuitService {
     domain: 'circuitsandbox.net',
     client_id: '8e3edf9798f341c08ae59b5d8cf74341',
     redirect_uri: this.redirectUri,
-    scope: 'ALL'
+    scope: 'READ_USER_PROFILE,WRITE_USER_PROFILE,READ_CONVERSATIONS,WRITE_CONVERSATIONS,' +
+            'READ_USER,CALLS,CALL_RECORDING,MENTION_EVENT,USER_MANAGEMENT'
   };
 
   constructor(private http: HttpClient, private router: Router) {
@@ -303,7 +304,7 @@ export class CircuitService {
     return this.http.post(
       this.restUri + '/conversations/direct',
       {
-        participant: customer.email
+        participant: customer.emailAddress
       },
       {
         headers: this.headers

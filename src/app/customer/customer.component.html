@@ -1,105 +1,110 @@
-<div class="card" id="card" *ngFor="let customer of customersToShow" >
-  <div class="card-header" id="card-header">
-    <img
-      src="https://ui-avatars.com/api/?name={{customer?.name}}+{{customer?.surname}}"
-      class="rounded-circle">
-    <div>
-      {{customer?.name}} {{customer?.surname}}<br>
-      <i>Offline</i><br>
+<div style="display: flex; flex-wrap: wrap;">
+  <div class="card" id="card" *ngFor="let customer of customersToShow" >
+    <div class="card-header" id="card-header">
+      <img
+        src="https://ui-avatars.com/api/?name={{customer?.name}}+{{customer?.surname}}"
+        class="rounded-circle">
+      <div>
+        {{customer?.name}} {{customer?.surname}}<br>
+        <i>Offline</i><br>
+      </div>
+      <div id="shortInfo">
+        <table>
+          <tbody>
+            <tr>
+              <td>E-Mail:</td>
+              <td>{{customer?.emailAddress}}</td>
+            </tr>
+            <tr>
+              <td>Telefon:</td>
+              <td>{{customer?.phone}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <ngb-tabset #t="ngbTabset" type="pills">
+      <ngb-tab id="tab1">
+        <ng-template ngbTabTitle class="ngbTab">Informationen</ng-template>
+        <ng-template ngbTabContent>
+          <hr />
+          <div class="card-body" id="details">
+            <h5 class="card-title">Kundendetails</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Kundendaten</h6>
+            <div class="card-text">
+              <table class="table table-sm table-borderless">
+                <tbody>
+                <tr>
+                  <td>Kunde</td>
+                  <td>{{customer?.salutation}} {{customer?.name}}
+                    {{customer?.surname}}</td>
+                </tr>
+                <tr>
+                  <td>Nationalität</td>
+                  <td>{{customer?.nationality}}</td>
+                </tr>
+                <tr>
+                  <td>Adresse</td>
+                  <td>{{customer?.address.postalcode}}
+                    {{customer?.address.city}},
+                    {{customer?.address.street}}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <h6 class="card-subtitle mb-2 text-muted">Kontakt</h6>
+            <div class="card-text">
+              <table class="table table-sm table-borderless">
+                <tbody>
+                <tr>
+                  <td>E-Mail</td>
+                  <td>{{customer?.emailAddress}}</td>
+                </tr>
+                <tr>
+                  <td>Telefon</td>
+                  <td>{{customer?.phone}}</td>
+                </tr>
+                <tr>
+                  <td>Kontakt per</td>
+                  <td>
+                    <div class="td-badge"
+                         *ngFor="let form of customer?.contactform">
+                      <span class="badge badge-secondary">{{form}}</span>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <button class="btn btn-light"
+                    (click)="generateChatProtocol()">Konversationsprotokoll
+              generieren</button>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab2">
+        <ng-template ngbTabTitle class="ngbTab">Konversation</ng-template>
+        <ng-template ngbTabContent>
+          <hr />
+          <div class="card-body">
+            <app-customer-chat [customer1]="customer?.id"></app-customer-chat>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>
+<div theme class="row">
+  <div theme class="col">
+    <div theme ngbDropdown class="d-inline-block">
+      <button theme class="btn btn-primary" id="dropdown1"
+      ngbDropdownToggle [disabled]="customersToShow.length === 4">Weitere Kunden</button>
+      <div theme ngbDropdownMenu aria-labelledby="dropdown1">
+        <button theme ngbDropdownItem *ngFor="let customer of allCustomers" class="btn btn-primary"
+        (click)="addCustomers(customer.id)">{{ customer.name }} {{ customer.surname }}</button>
+      </div>
     </div>
   </div>
-  <ngb-tabset #t="ngbTabset" type="pills">
-    <ngb-tab id="tab1">
-      <ng-template ngbTabTitle class="ngbTab">Informationen</ng-template>
-      <ng-template ngbTabContent>
-        <hr />
-        <div class="card-body" id="details">
-          <h5 class="card-title">Kundendetails</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Kundendaten</h6>
-          <div class="card-text">
-            <table class="table table-sm table-borderless">
-              <tbody>
-              <tr>
-                <td>Kunde</td>
-                <td>{{customer?.salutation}} {{customer?.name}}
-                  {{customer?.surname}}</td>
-              </tr>
-              <tr>
-                <td>Nationalität</td>
-                <td>{{customer?.nationality}}</td>
-              </tr>
-              <tr>
-                <td>Adresse</td>
-                <td>{{customer?.address.postalcode}}
-                  {{customer?.address.city}},
-                  {{customer?.address.street}}
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <h6 class="card-subtitle mb-2 text-muted">Kontakt</h6>
-          <div class="card-text">
-            <table class="table table-sm table-borderless">
-              <tbody>
-              <tr>
-                <td>E-Mail</td>
-                <td>{{customer?.email}}</td>
-              </tr>
-              <tr>
-                <td>Telefon</td>
-                <td>{{customer?.phone}}</td>
-              </tr>
-              <tr>
-                <td>Kontakt per</td>
-                <td>
-                  <div class="td-badge"
-                       *ngFor="let form of customer?.contactform">
-                    <span class="badge badge-secondary">{{form}}</span>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-
-          </div>
-          <button class="btn btn-light"
-                  (click)="generateChatProtocol()">Konversationsprotokoll
-            generieren</button>
-            <div theme class="row">
-              <div theme class="col">
-                <div theme ngbDropdown class="d-inline-block">
-                  <button theme class="btn btn-primary" id="dropdown1"
-                  ngbDropdownToggle>Dropdown</button>
-                  <div theme ngbDropdownMenu aria-labelledby="dropdown1">
-                    <button theme (click)="setThemeAtos()" ngbDropdownItem class="btn btn-primary">Atos</button>
-                    <button theme (click)="setThemeBa()" ngbDropdownItem class="btn btn-primary">Bundesagentur</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab id="tab2">
-      <ng-template ngbTabTitle class="ngbTab">Konversation</ng-template>
-      <ng-template ngbTabContent>
-        <hr />
-        <div class="card-body">
-          <app-customer-chat></app-customer-chat>
-        </div>
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
 </div>
-
-
-
-
-
-<!--
-<div class="btn-group btn-group-sm" role="group" aria-label="..."
-  (click)="changeView()">
-  <button type="button" class="btn btn-secondary">Details</button>
-  <button type="button" class="btn btn-secondary">Konversation</button>
-</div> -->

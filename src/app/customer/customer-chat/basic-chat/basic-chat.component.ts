@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { CustomerComponent } from './../../customer.component';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { Customer } from '../../../models/customer';
 import { faEdit, faVideo, faPhone, faPhoneSlash, faPaperPlane, faVideoSlash } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class BasicChatComponent implements OnInit {
   customer: Customer;
+  customers: Customer[];
   participants = [];
 
   // fontawesome vars
@@ -28,39 +30,39 @@ export class BasicChatComponent implements OnInit {
   messageTopic = '';
   messageTopicDesc = '';
 
+  @Input() customer1: any;
+
   @ViewChild('scrollChat', {static: false}) private chat: ElementRef<any>;
   constructor(
     private activatedRoute: ActivatedRoute,
     private customerService: CustomerService,
     public circuitService: CircuitService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private customerComponent: CustomerComponent
   ) { }
+
+
 
   ngOnInit() {
     this.spinner.show();
-    this.activatedRoute.params.subscribe(params => {
-      this.customerService.getCustomerById(params.id1).subscribe(val => {
-        this.customer = val;
+
+    this.circuitService.getUserById(this.customer1).then(user => { this.customer = user;
+      // this.circuitService.authenticateUser();
+      this.circuitService.loggedIn.subscribe(value => {
+        if (value) {
+          this.setThreadsOfConversation();
+        }
       });
-      console.log(this.customer.name);
-      console.log(this.loggedOnUser);
-    });
 
-    // this.circuitService.authenticateUser();
-    this.circuitService.loggedIn.subscribe(value => {
-      if (value) {
+      this.circuitService.addEventListener('itemAdded', () => {
         this.setThreadsOfConversation();
-      }
-    });
+      }); } );
 
-    this.circuitService.addEventListener('itemAdded', () => {
-      this.setThreadsOfConversation();
-    });
   }
 
   async setThreadsOfConversation() {
     const threadObject = await this.circuitService.getConversation(
-      this.customer.email
+      this.customer.emailAddress
     );
     this.threads = threadObject.threads;
     this.getParticipants();
@@ -135,7 +137,7 @@ export class BasicChatComponent implements OnInit {
   // circuit service
   // call
   startCall(customer: Customer, video: boolean) {
-    this.circuitService.startCall(customer.email, video);
+    this.circuitService.startCall(customer.emailAddress, video);
   }
 
   endCall() {

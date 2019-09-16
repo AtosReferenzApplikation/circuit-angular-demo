@@ -1,6 +1,5 @@
 #card-body-chat {
   padding: 0;
-
   display: grid;
   grid-template-rows: auto 360px auto;
 }
@@ -62,7 +61,7 @@
 
 .message {
   margin: 0 auto;
-  width: 85%;
+  width: 98%;
 
   display: flex;
 }
@@ -90,7 +89,7 @@
 }
 
 #topicInput {
-  width: 85%;
+  width: 98%;
   margin: 0 auto !important;
 
   #img {
@@ -115,8 +114,9 @@
 
 .rtc {
   margin: 1rem auto;
-  padding-left: 50px;
-  width: 85%;
-  // text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
   font-size: 90%;
+  text-overflow: scroll;
 }

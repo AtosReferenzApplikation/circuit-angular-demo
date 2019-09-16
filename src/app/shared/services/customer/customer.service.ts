@@ -1,3 +1,4 @@
+import { CustomerComponent } from './../../../customer/customer.component';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Customer } from '../../../models/customer';
