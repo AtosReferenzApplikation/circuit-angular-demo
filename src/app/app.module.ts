@@ -12,6 +12,7 @@ import { LoginModule } from './login/login.module';
 import { SharedModule } from './shared';
 import { FeedbackModule } from './feedback/feedback.module';
 import { SupportComponent } from './support/support.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SupportComponent } from './support/support.component';
     CustomerModule,
     SharedModule,
     FeedbackModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

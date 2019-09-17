@@ -93,7 +93,7 @@ export class BasicChatComponent implements OnInit {
     try {
       return this.participants[
         this.participants.findIndex(user => user.userId === id)
-      ].avatar;
+        ].avatar;
     } catch {
       return 'https://ui-avatars.com/api/?name=?';
     }
@@ -103,7 +103,7 @@ export class BasicChatComponent implements OnInit {
     try {
       return this.participants[
         this.participants.findIndex(user => user.userId === id)
-      ].displayName;
+        ].displayName;
     } catch {
       return 'Kunde';
     }

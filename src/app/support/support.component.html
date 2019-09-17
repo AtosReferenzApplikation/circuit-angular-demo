@@ -1,10 +1,16 @@
-<p>
-  {{ request?.subject }}
-</p>
+<div *ngIf="!this.available">
+  <label> Chat aktiv </label>
+  <button (click)="closeSupportRequest()"> Schließe Anfrage ab </button>
+</div>
+
+<div *ngIf="this.available">
+  <label> Verfügbar </label>
+</div>
 
 <div *ngIf="request?.subject">
+  <label> <b>Titel:</b> {{ request?.subject}} </label><br>
+  <label> <b>Beschreibung:</b> {{ request?.description }} </label><br>
   <button type="button" (click)="acceptSupportRequest()">
-    Accept Support Request
+    Übernehme Anfrage
   </button>
-  <a>Subject: {{ request?.subject }}</a>
 </div>
