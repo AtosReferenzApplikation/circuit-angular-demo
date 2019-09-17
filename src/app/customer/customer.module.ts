@@ -7,6 +7,7 @@ import { CustomerChatModule } from './customer-chat/customer-chat.module';
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     CustomerChatModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   declarations: [
     CustomerComponent,

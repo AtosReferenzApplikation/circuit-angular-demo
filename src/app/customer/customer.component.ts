@@ -6,6 +6,7 @@ import {CircuitService, CustomerService, SAMPLE_CUSTOMERS} from '../shared';
 import { Customer } from '../models/customer';
 import 'rxjs/add/operator/filter';
 import { isUndefined } from 'util';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-customer',
@@ -18,6 +19,8 @@ export class CustomerComponent implements OnInit {
   avatarUrl = '';
   allCustomers: Customer[] = SAMPLE_CUSTOMERS; // contains all customers which could be added
   id1: string; id2: string; id3: string; id4: string;
+
+  faPlusCircle = faPlusCircle;
 
   constructor(
     private activatedRoute: ActivatedRoute,

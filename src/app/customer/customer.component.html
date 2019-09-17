@@ -96,11 +96,16 @@
     </ngb-tabset>
   </div>
 </div>
-<div theme class="row">
+<div id="disableTextbox" *ngIf="customersToShow.length === 4">
+    <p>Es sind bereits 4 Chats geöffnet!</p>
+  </div>
+<div theme class="row" *ngIf="customersToShow.length != 4">
   <div theme class="col">
     <div theme ngbDropdown class="d-inline-block">
       <button theme class="btn btn-primary" id="dropdown1"
-      ngbDropdownToggle [disabled]="customersToShow.length === 4">Weitere Kunden</button>
+      ngbDropdownToggle>
+      <fa-icon [icon]="faPlusCircle" style="font-size: 26px;"></fa-icon>
+      </button>
       <div theme ngbDropdownMenu aria-labelledby="dropdown1">
         <button theme ngbDropdownItem *ngFor="let customer of allCustomers" class="btn btn-primary"
         (click)="addCustomers(customer.id)">{{ customer.name }} {{ customer.surname }}</button>

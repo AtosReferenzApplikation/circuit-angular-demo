@@ -109,3 +109,11 @@ hr {
  #shortInfo {
    padding-left: 10px;
 }
+
+#disableTextbox {
+  color: var(--on-primary);
+  background-color: var(--primary);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
