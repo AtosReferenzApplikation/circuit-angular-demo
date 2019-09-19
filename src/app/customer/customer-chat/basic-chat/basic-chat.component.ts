@@ -44,7 +44,7 @@ export class BasicChatComponent implements OnInit {
 
 
   ngOnInit() {
-    this.spinner.show();
+    this.spinner.show(this.customer1);
 
     this.circuitService.getUserById(this.customer1).then(user => { this.customer = user;
       this.circuitService.authenticateUser();
@@ -74,7 +74,7 @@ export class BasicChatComponent implements OnInit {
     const checkParticipants = setInterval(() => {
       if (this.participants) {
         clearInterval(checkParticipants);
-        this.spinner.hide();
+        this.spinner.hide(this.customer1);
         this.chat.nativeElement.scrollTop = this.chat.nativeElement.scrollHeight;
       }
     }, 100);

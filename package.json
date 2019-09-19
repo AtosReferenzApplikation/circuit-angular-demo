@@ -31,7 +31,7 @@
     "circuit-sdk": "^1.2.5402",
     "core-js": "2.5.6",
     "css-star-rating": "^1.2.4",
-    "ngx-spinner": "^7.0.0",
+    "ngx-spinner": "^8.0.3",
     "ngx-toastr": "^10.0.2",
     "node-sass": "^4.11.0",
     "os": "^0.1.1",
