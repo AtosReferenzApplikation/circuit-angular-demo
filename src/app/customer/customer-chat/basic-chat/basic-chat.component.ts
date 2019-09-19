@@ -47,7 +47,7 @@ export class BasicChatComponent implements OnInit {
     this.spinner.show();
 
     this.circuitService.getUserById(this.customer1).then(user => { this.customer = user;
-      // this.circuitService.authenticateUser();
+      this.circuitService.authenticateUser();
       this.circuitService.loggedIn.subscribe(value => {
         if (value) {
           this.setThreadsOfConversation();
