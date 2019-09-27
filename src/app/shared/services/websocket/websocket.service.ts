@@ -1,5 +1,3 @@
-
-
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Client, Message, over, StompSubscription } from '@stomp/stompjs';

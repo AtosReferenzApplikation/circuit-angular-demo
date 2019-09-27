@@ -32,7 +32,7 @@ export class SupportComponent implements OnInit {
   }
 
   acceptSupportRequest() {
-    this.supporter.email = 'Frank.Rot86@mailinator.com';  // TODO get mail of current  user
+    this.supporter.email = 'peter.meier99@gmx.de';  // TODO get mail of current  user
     this.websocket.send('/app/set/supporter/' + this.request.id, this.supporter);
     this.request = {id: '', subject: '', description: ''};
     // Unsubscribe Topic for receiving new Requests
